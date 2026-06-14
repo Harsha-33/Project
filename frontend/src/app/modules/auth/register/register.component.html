@@ -1,0 +1,91 @@
+<div class="auth-wrapper d-flex align-items-center justify-content-center min-vh-100 py-4">
+  <div class="card shadow-lg auth-card">
+    <div class="card-body p-5">
+      <div class="text-center mb-4">
+        <h2>Create Account</h2>
+        <p class="text-muted">Join WeCareForYou Healthcare</p>
+      </div>
+
+      @if (error) { <div class="alert alert-danger">{{ error }}</div> }
+      @if (success) { <div class="alert alert-success">{{ success }}</div> }
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password" />
+          @if (form.get('password')?.value) {
+            <div class="progress mt-2" style="height: 4px;">
+              <div class="progress-bar" [class]="'bg-' + (passwordStrength < 2 ? 'danger' : passwordStrength < 4 ? 'warning' : 'success')"
+                [style.width.%]="passwordStrength * 25"></div>
+            </div>
+            <small class="text-muted">Strength: {{ strengthLabel }}</small>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" formControlName="confirmPassword"
+            [class.is-invalid]="form.hasError('mismatch') && form.get('confirmPassword')?.touched" />
+          @if (form.hasError('mismatch') && form.get('confirmPassword')?.touched) {
+            <div class="invalid-feedback">Passwords do not match</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select class="form-select" formControlName="role">
+            <option value="PATIENT">Patient</option>
+            <option value="DOCTOR">Doctor</option>
+          </select>
+        </div>
+        @if (form.value.role === 'PATIENT') {
+          <div class="mb-3">
+            <label class="form-label">DOB</label>
+            <input type="date" class="form-control" formControlName="dob" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <input type="text" class="form-control" formControlName="gender" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" formControlName="mobile" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" formControlName="address" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Medical History</label>
+            <textarea class="form-control" rows="2" formControlName="medical_history"></textarea>
+          </div>
+        }
+        @if (form.value.role === 'DOCTOR') {
+          <div class="mb-3">
+            <label class="form-label">Speciality</label>
+            <input type="text" class="form-control" formControlName="speciality" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" formControlName="phone" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Qualification</label>
+            <input type="text" class="form-control" formControlName="qualification" />
+          </div>
+        }
+        <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid || loading">
+          {{ loading ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+
+      <p class="text-center mt-3 mb-0 small">Already have an account? <a routerLink="/auth/login">Login</a></p>
+    </div>
+  </div>
+</div>

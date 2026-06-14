@@ -1,0 +1,9 @@
+.auth-wrapper {
+  background: #e8f1f2;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 8px;
+}

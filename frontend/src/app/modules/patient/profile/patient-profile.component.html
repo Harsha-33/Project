@@ -1,0 +1,25 @@
+<h2 class="mb-4">My Profile</h2>
+
+@if (loading) {
+  <div class="alert alert-info">Loading profile...</div>
+}
+
+@if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
+}
+
+@if (profile) {
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <div class="row g-3">
+        <div class="col-md-6"><strong>Name:</strong> {{ profile.name }}</div>
+        <div class="col-md-6"><strong>Email:</strong> {{ profile.email }}</div>
+        <div class="col-md-6"><strong>Gender:</strong> {{ profile.gender || 'N/A' }}</div>
+        <div class="col-md-6"><strong>Mobile:</strong> {{ profile.mobile || 'N/A' }}</div>
+        <div class="col-md-6"><strong>DOB:</strong> {{ profile.dob || 'N/A' }}</div>
+        <div class="col-md-6"><strong>Address:</strong> {{ profile.address || 'N/A' }}</div>
+        <div class="col-12"><strong>Medical History:</strong> {{ profile.medical_history || 'None recorded' }}</div>
+      </div>
+    </div>
+  </div>
+}

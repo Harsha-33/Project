@@ -1,0 +1,52 @@
+<h2 class="mb-4">Patient Dashboard</h2>
+<div class="row g-4">
+  <div class="col-md-3">
+    <div class="card stat-card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-muted mb-1">Upcoming Appointments</p>
+            <h3 class="mb-0">{{ stats.upcoming_appointments ?? 0 }}</h3>
+          </div>
+          <i class="bi bi-calendar-check text-primary fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-muted mb-1">Completed Consultations</p>
+            <h3 class="mb-0">{{ stats.completed_consultations ?? 0 }}</h3>
+          </div>
+          <i class="bi bi-clipboard2-pulse text-success fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="text-muted mb-1">Prescriptions</p>
+            <h3 class="mb-0">{{ stats.prescriptions ?? 0 }}</h3>
+          </div>
+          <i class="bi bi-capsule text-warning fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card stat-card border-0 shadow-sm bg-primary text-white">
+      <div class="card-body text-center">
+        <a routerLink="/patient/book-appointment" class="text-white text-decoration-none">
+          <i class="bi bi-plus-circle fs-1 d-block mb-2"></i>
+          <strong>Book Appointment</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

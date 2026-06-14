@@ -1,0 +1,45 @@
+<h2 class="mb-4">Appointments</h2>
+
+@if (message) { <div class="alert alert-success">{{ message }}</div> }
+@if (error) { <div class="alert alert-danger">{{ error }}</div> }
+
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Patient</th>
+          <th>Contact Number</th>
+          <th>Date & Time</th>
+          <th>Symptoms</th>
+          <th>Visit Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (appt of appointments; track appt.appointment_id) {
+          <tr [class]="getRowClass(appt.status)">
+            <td>{{ appt.patient_name }}</td>
+            <td>{{ appt.patient_mobile || 'N/A' }}</td>
+            <td>{{ appt.appointment_date | date:'medium' }}</td>
+            <td>{{ appt.symptoms || 'N/A' }}</td>
+            <td>{{ appt.visit_type }}</td>
+            <td><span class="badge" [class]="appt.status === 'REJECTED' || appt.status === 'CANCELLED' ? 'bg-danger' : appt.status === 'CONFIRMED' || appt.status === 'ACCEPTED' || appt.status === 'COMPLETED' ? 'bg-success' : 'bg-warning'">{{ appt.status }}</span></td>
+            <td>
+              @if (appt.status === 'PENDING') {
+                <button class="btn btn-sm btn-success me-1" (click)="accept(appt.appointment_id)">Accept</button>
+                <button class="btn btn-sm btn-danger" (click)="reject(appt.appointment_id)">Reject</button>
+              }
+              @if (appt.status === 'CONFIRMED' || appt.status === 'ACCEPTED') {
+                <a [routerLink]="['/doctor/consultation', appt.appointment_id]" class="btn btn-sm btn-primary">Consult</a>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="7" class="text-center text-muted py-4">No appointments</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

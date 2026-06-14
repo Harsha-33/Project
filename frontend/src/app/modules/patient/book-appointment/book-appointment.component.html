@@ -1,0 +1,87 @@
+<h2 class="mb-4">Book Appointment</h2>
+
+@if (message) { <div class="alert alert-success">{{ message }}</div> }
+@if (error) { <div class="alert alert-danger">{{ error }}</div> }
+
+<form [formGroup]="searchForm" (ngSubmit)="loadDoctors()" class="row g-3 mb-3">
+  <div class="col-md-5">
+    <input class="form-control" placeholder="Search doctor name" formControlName="search" />
+  </div>
+  <div class="col-md-5">
+    <input class="form-control" placeholder="Search speciality" formControlName="speciality" />
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-outline-primary w-100">
+      {{ searching ? 'Searching...' : 'Search' }}
+    </button>
+  </div>
+</form>
+
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Doctor</label>
+          <select class="form-select" formControlName="doctor_id">
+            <option value="">Select Doctor</option>
+            @for (doc of doctors; track doc.doctor_id) {
+              <option [value]="doc.doctor_id">{{ doc.name }} - {{ doc.speciality }}</option>
+            }
+          </select>
+          @if (!searching && !doctors.length) {
+            <div class="form-text text-danger">No doctors found for this search.</div>
+          }
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-control" formControlName="appointment_date" [min]="minDate" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Time</label>
+          <select class="form-select" formControlName="appointment_time" [disabled]="!availableSlots.length">
+            <option value="">Select slot</option>
+            @for (slot of availableSlots; track slot) {
+              <option [value]="slot">{{ slot }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Visit Type</label>
+          <select class="form-select" formControlName="visit_type">
+            <option value="In-Person">In-Person</option>
+            <option value="Video Call">Video Call</option>
+            <option value="Follow-up">Follow-up</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Symptoms</label>
+          <textarea class="form-control" rows="3" formControlName="symptoms"></textarea>
+        </div>
+        <div class="col-12">
+          @if (availableSlots.length) {
+            <div class="mb-3">
+              <label class="form-label">Available Slots</label>
+              <div class="d-flex flex-wrap gap-2">
+                @for (slot of availableSlots; track slot) {
+                  <button type="button" class="btn btn-sm btn-outline-success" (click)="chooseSlot(slot)">
+                    {{ slot }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
+          @if (occupiedSlots.length) {
+            <p class="small text-muted mb-3">Booked slots: {{ occupiedSlots.join(', ') }}</p>
+          }
+          @if (form.value.doctor_id && form.value.appointment_date && !availableSlots.length) {
+            <p class="small text-muted mb-3">No available slots for this doctor on the selected date.</p>
+          }
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || loading || !isSelectedSlotAvailable()">
+            {{ loading ? 'Booking...' : 'Book Appointment' }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

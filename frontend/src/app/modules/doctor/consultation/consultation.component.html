@@ -1,0 +1,85 @@
+<h2 class="mb-4">Consultation Form</h2>
+
+@if (message) { <div class="alert alert-success">{{ message }}</div> }
+@if (error) { <div class="alert alert-danger">{{ error }}</div> }
+
+<div class="card shadow-sm mb-4">
+  <div class="card-header bg-primary text-white">Consultation Details</div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="saveConsultation()">
+      <div class="mb-3">
+        <label class="form-label">Current Symptoms</label>
+        <textarea class="form-control" rows="2" formControlName="current_symptoms"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Physical Examination</label>
+        <textarea class="form-control" rows="2" formControlName="physical_examination"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Diagnosis</label>
+        <textarea class="form-control" rows="2" formControlName="diagnosis"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Treatment Plan</label>
+        <textarea class="form-control" rows="2" formControlName="treatment_plan"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save Consultation</button>
+    </form>
+  </div>
+</div>
+
+@if (consultationId) {
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header">Add Prescription</div>
+        <div class="card-body">
+          <form [formGroup]="prescriptionForm" (ngSubmit)="addPrescription()">
+            <div formArrayName="prescriptions">
+              @for (row of prescriptions.controls; track $index) {
+                <div class="border rounded p-2 mb-2" [formGroupName]="$index">
+                  <div class="mb-2">
+                    <input
+                      class="form-control"
+                      placeholder="Medicine Name"
+                      formControlName="medicine_name"
+                      [attr.list]="'medicine-list-' + $index"
+                      (input)="searchMedicines($index)"
+                    />
+                    <datalist [id]="'medicine-list-' + $index">
+                      @for (medicine of medicineSuggestions[$index]; track medicine) {
+                        <option [value]="medicine"></option>
+                      }
+                    </datalist>
+                  </div>
+                  <div class="mb-2">
+                    <input class="form-control" placeholder="Dosage" formControlName="dosage" />
+                  </div>
+                  <div class="mb-2">
+                    <input class="form-control" placeholder="Timing" formControlName="timing" />
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline-danger" (click)="removePrescriptionRow($index)" [disabled]="prescriptions.length === 1">Remove</button>
+                </div>
+              }
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary me-2" (click)="addPrescriptionRow()">+ Medicine</button>
+            <button type="submit" class="btn btn-sm btn-success" [disabled]="prescriptionForm.invalid">Save Prescriptions</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header">Recommend Test</div>
+        <div class="card-body">
+          <form [formGroup]="testForm" (ngSubmit)="addTest()">
+            <div class="mb-2">
+              <input class="form-control" placeholder="Test Name" formControlName="test_name" />
+            </div>
+            <button type="submit" class="btn btn-sm btn-info" [disabled]="testForm.invalid">Add Test</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

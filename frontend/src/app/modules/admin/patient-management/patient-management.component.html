@@ -1,0 +1,56 @@
+<h2 class="mb-4">Patient Management</h2>
+
+@if (message) { <div class="alert alert-success">{{ message }}</div> }
+@if (error) { <div class="alert alert-danger">{{ error }}</div> }
+
+<button class="btn btn-primary mb-3" (click)="openAdd()">Add Patient</button>
+
+@if (showForm) {
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="save()" class="row g-3">
+        <div class="col-md-4"><input class="form-control" placeholder="Name" formControlName="name" /></div>
+        <div class="col-md-4"><input class="form-control" placeholder="Email" formControlName="email" /></div>
+        @if (!editingId) {
+          <div class="col-md-4"><input class="form-control" placeholder="Password" formControlName="password" /></div>
+        }
+        <div class="col-md-3"><input type="date" class="form-control" placeholder="DOB" formControlName="dob" /></div>
+        <div class="col-md-3"><input class="form-control" placeholder="Gender" formControlName="gender" /></div>
+        <div class="col-md-3"><input class="form-control" placeholder="Phone" formControlName="mobile" /></div>
+        <div class="col-md-3"><input class="form-control" placeholder="Address" formControlName="address" /></div>
+        <div class="col-12"><input class="form-control" placeholder="Medical History" formControlName="medical_history" /></div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success me-2">Save</button>
+          <button type="button" class="btn btn-secondary" (click)="showForm = false">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr><th>Name</th><th>Email</th><th>DOB</th><th>Gender</th><th>Phone</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        @for (p of patients; track p.patient_id) {
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.email }}</td>
+            <td>{{ p.dob || 'N/A' }}</td>
+            <td>{{ p.gender }}</td>
+            <td>{{ p.mobile }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-1" (click)="openEdit(p)">Edit</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="delete(p.patient_id)">Delete</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr><td colspan="6" class="text-center text-muted py-4">No patients found</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

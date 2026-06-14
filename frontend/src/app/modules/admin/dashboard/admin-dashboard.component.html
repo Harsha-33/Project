@@ -1,0 +1,30 @@
+<h2 class="mb-4">Admin Dashboard</h2>
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm border-0">
+      <div class="card-body">
+        <p class="text-muted">Total Doctors</p>
+        <h3>{{ stats.total_doctors ?? 0 }}</h3>
+        <a routerLink="/admin/doctors" class="small">Manage</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm border-0">
+      <div class="card-body">
+        <p class="text-muted">Total Patients</p>
+        <h3>{{ stats.total_patients ?? 0 }}</h3>
+        <a routerLink="/admin/patients" class="small">Manage</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card stat-card shadow-sm border-0">
+      <div class="card-body">
+        <p class="text-muted">Total Appointments</p>
+        <h3>{{ stats.total_appointments ?? 0 }}</h3>
+        <a routerLink="/admin/appointments" class="small">Manage</a>
+      </div>
+    </div>
+  </div>
+</div>

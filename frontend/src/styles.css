@@ -1,0 +1,239 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --wc-teal: #075e63;
+  --wc-teal-dark: #064b50;
+  --wc-mint: #d8efed;
+  --wc-coral: #ef8354;
+  --wc-ink: #17313b;
+  --wc-muted: #647a82;
+  --wc-line: #d9e4e6;
+  --wc-canvas: #f4f8f8;
+  --wc-white: #ffffff;
+  --bs-primary: #075e63;
+  --bs-primary-rgb: 7, 94, 99;
+  --bs-success: #27866f;
+  --bs-success-rgb: 39, 134, 111;
+  --bs-info: #66b7c2;
+  --bs-info-rgb: 102, 183, 194;
+  --bs-warning: #e6a23c;
+  --bs-warning-rgb: 230, 162, 60;
+  --bs-danger: #c95050;
+  --bs-danger-rgb: 201, 80, 80;
+}
+
+* {
+  letter-spacing: 0;
+}
+
+body {
+  min-width: 320px;
+  color: var(--wc-ink);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--wc-canvas);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--wc-ink);
+  font-weight: 700;
+}
+
+h2 {
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.5rem !important;
+  border-bottom: 1px solid var(--wc-line);
+}
+
+.card {
+  overflow: hidden;
+  background: var(--wc-white);
+  border: 1px solid var(--wc-line);
+  border-radius: 8px;
+  box-shadow: 0 7px 22px rgba(31, 66, 75, 0.08) !important;
+}
+
+.card-header {
+  padding: 0.9rem 1.1rem;
+  color: var(--wc-ink);
+  font-weight: 700;
+  background: #e8f3f2;
+  border-bottom: 1px solid var(--wc-line);
+}
+
+.card-header.bg-primary,
+.card-header.bg-success {
+  color: #ffffff !important;
+  background: var(--wc-teal) !important;
+}
+
+.stat-card {
+  border-top: 4px solid var(--wc-coral) !important;
+}
+
+.stat-card h3 {
+  color: var(--wc-teal);
+  font-size: 2rem;
+}
+
+.btn {
+  min-height: 38px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(31, 66, 75, 0.16);
+}
+
+.btn-primary,
+.btn-success {
+  color: #ffffff;
+  background: var(--wc-teal);
+  border-color: var(--wc-teal);
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  background: var(--wc-teal-dark);
+  border-color: var(--wc-teal-dark);
+}
+
+.btn-outline-primary {
+  color: var(--wc-teal);
+  border-color: var(--wc-teal);
+}
+
+.btn-outline-primary:hover {
+  color: #ffffff;
+  background: var(--wc-teal);
+  border-color: var(--wc-teal);
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+  color: var(--wc-ink);
+  border-color: #c9d8db;
+  border-radius: 6px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--wc-teal);
+  box-shadow: 0 0 0 0.2rem rgba(7, 94, 99, 0.14);
+}
+
+.form-label {
+  margin-bottom: 0.4rem;
+  color: #35545d;
+  font-weight: 600;
+}
+
+.table {
+  color: var(--wc-ink);
+}
+
+.table th {
+  padding: 0.85rem;
+  color: #35545d;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #edf4f4 !important;
+  border-bottom: 2px solid #ceddde;
+}
+
+.table td {
+  padding: 0.85rem;
+  vertical-align: middle;
+  border-color: #e3ebec;
+}
+
+.table-hover tbody tr:hover > * {
+  background: #f0f7f6;
+}
+
+.table-success > * {
+  --bs-table-bg: #e3f4ef;
+}
+
+.badge {
+  padding: 0.45em 0.65em;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.alert {
+  border: 0;
+  border-left: 4px solid currentColor;
+  border-radius: 6px;
+}
+
+.alert-success {
+  color: #195f50;
+  background: #dff2eb;
+}
+
+.alert-danger {
+  color: #8a3030;
+  background: #f8e2e2;
+}
+
+.alert-info {
+  color: #245e68;
+  background: #e0f1f3;
+}
+
+.text-muted {
+  color: var(--wc-muted) !important;
+}
+
+.auth-wrapper {
+  position: relative;
+  background: #e8f1f2 !important;
+}
+
+.auth-wrapper::before {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 8px;
+  content: "";
+  background: linear-gradient(90deg, var(--wc-teal) 0 72%, var(--wc-coral) 72%);
+}
+
+.auth-card {
+  border: 1px solid var(--wc-line) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 18px 45px rgba(31, 66, 75, 0.15) !important;
+}
+
+.auth-card h2 {
+  padding: 0;
+  border: 0;
+}
+
+.auth-card .btn-primary {
+  min-height: 48px;
+}
+
+@media (max-width: 767px) {
+  h2 {
+    font-size: 1.65rem;
+  }
+
+  .card-body {
+    padding: 1rem !important;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.7rem;
+  }
+}
