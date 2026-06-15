@@ -47,6 +47,12 @@ chmod +x scripts/ubuntu-run.sh
 ./scripts/ubuntu-run.sh
 ```
 
+If Node/npm is installed on Ubuntu, you can also start Docker from the project root:
+
+```bash
+npm start
+```
+
 Open:
 
 - Frontend: `http://localhost:4200`

@@ -72,6 +72,20 @@ docker compose up --build
 
 The Docker frontend runs at `http://localhost:4200` and proxies `/api` to the backend.
 
+On Windows, you can also start the Docker app from the project root with:
+
+```bat
+start-docker.bat
+```
+
+Or with npm from the project root:
+
+```bash
+npm start
+```
+
+Use `http://localhost:4200` for the Docker app. Use `frontend:dev` only when you specifically want Angular dev server mode.
+
 The backend requires `DATABASE_URL`; it will not silently fall back to a local SQLite database unless `ALLOW_SQLITE_FALLBACK=true` is explicitly set.
 
 ### Ubuntu and Jenkins

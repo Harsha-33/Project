@@ -1,0 +1,13 @@
+{
+  "name": "wecareforyou",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "docker compose up --build -d",
+    "stop": "docker compose down",
+    "logs": "docker compose logs -f",
+    "status": "docker compose ps",
+    "frontend:dev": "npm --prefix frontend start",
+    "frontend:build": "npm --prefix frontend run build"
+  }
+}
