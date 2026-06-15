@@ -1,16 +1,26 @@
 services:
   backend:
+    container_name: wecare-backend
     build:
       context: ./backend
     env_file:
       - ./backend/.env
+    restart: unless-stopped
     ports:
       - "5000:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/api/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
   frontend:
+    container_name: wecare-frontend
     build:
       context: ./frontend
     depends_on:
       - backend
+    restart: unless-stopped
     ports:
       - "4200:80"
