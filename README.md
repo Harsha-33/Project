@@ -84,7 +84,7 @@ Or with npm from the project root:
 npm start
 ```
 
-Use `http://localhost:4200` for the Docker app. Use `frontend:dev` only when you specifically want Angular dev server mode.
+Use `http://localhost:4200` for the Docker app. Use `frontend:dev` only when you specifically want Angular dev server mode on `http://localhost:3959`.
 
 The backend requires `DATABASE_URL`; it will not silently fall back to a local SQLite database unless `ALLOW_SQLITE_FALLBACK=true` is explicitly set.
 
